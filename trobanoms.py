@@ -1,9 +1,9 @@
 import random
-from silabes import silabes
+from silabesNomsPropis import silabesPropisMin as silabes
 from combinacions import incompatibles 
 #variables
 nom = []
-llargada = random.choice([1,1,2,2,2,2,2,2,2,3])
+llargada = random.choice([1,1,2,2,2,2,3,3,3,4])
 #funcions
 def obtenirLletres():
     darrera = nom[-2][-1]
@@ -13,23 +13,27 @@ def obtenirLletres():
 def compatibilitat():
     if obtenirLletres() in incompatibles:
         global nom
-        print(obtenirLletres())
         nom = nom[ : -1]
         afegirSilaba()
     
-def crearNom():
-    nom.append(random.choice(silabes))
-    print(nom)
-
 def afegirSilaba():
-    crearNom()
-    compatibilitat()
+    nom.append(random.choice(silabes))
+
+def crearNom():
+    for x in range (llargada):
+        if len(nom) == 0:
+            afegirSilaba()
+        else:
+            afegirSilaba()
+            compatibilitat()
 #crides
-for x in range (llargada):
-    if len(nom) == 0:
+
+with open ("noms.txt", "w") as noms:
+    for i in range (10):
         crearNom()
-    else:
-        afegirSilaba()
-#output
-print(nom)
+        noms.write("".join(nom) + "\n")
+        print(nom)
+        nom.clear()
+
+
 
